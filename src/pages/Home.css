@@ -1,0 +1,65 @@
+.content {
+  padding: 20px;
+}
+
+.carousel-container {
+  width: 650px;
+  margin: auto;
+  padding: 20px;
+}
+
+.carousel-slide {
+  display: flex;
+}
+
+.carousel-image {
+  background-size: cover;
+  background-position: center;
+  height: 650px;
+  width: 100%;
+}
+
+.about-title {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.about-image {
+  display: block;
+  margin: 20px auto;
+  max-width: 100%;
+}
+
+.about-paragraph {
+  font-size: 18px;
+  text-align: center;
+}
+
+.featured-title {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.featured-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.featured-card {
+  width: 200px;
+  margin: 0 8px;
+}
+
+.contact-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.contact-title {
+  margin-bottom: 20px;
+}
+
+.contact-address {
+  font-size: 18px;
+}

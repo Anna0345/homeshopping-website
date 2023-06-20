@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Bad+Script&display=swap");
+
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 15px;
+  margin: auto;
+  background-image: url("https://images.pexels.com/photos/276534/pexels-photo-276534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  margin-bottom: 100px;
+  z-index: 1;
+}
+
+.menu-primary {
+  background: transparent;
+  text-decoration: none;
+  margin: auto;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.logo-container .menu-item-link {
+  font-family: "Bad Script", cursive;
+  padding: 5px;
+  font-size: 24px;
+}
+
+.menu-item-link {
+  color: #9b3f3f;
+}
+
+.menu-secondary {
+  background: transparent;
+  border: none;
+}
+
+.search-input {
+  width: 300px;
+  height: 50px;
+  padding: 15px;
+  margin: auto;
+}
+
+.cart-icon,
+.heart-icon,
+.user-icon {
+  font-size: 25px !important;
+  color: #dd9798 !important; /* Change the color of the icons */
+}
+
+.menu-item-link {
+  font-size: 24px;
+  font-family: "Helvetica Neue", sans-serif;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.menu-item-link:hover,
+.menu-item-link:focus,
+.menu-item-link:active {
+  color: #bb7747 !important;
+  transition: color 0.2s ease-in-out !important;
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-item-active {
+  color: #b8a56d !important;
+}
