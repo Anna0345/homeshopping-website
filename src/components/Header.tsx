@@ -37,7 +37,7 @@ const AppHeader: React.FC = () => {
   );
   console.log(totalQuantity);
   const handleLogout = () => {
-    // Implement logout logic and dispatch actions if needed
+    sessionStorage.clear();
   };
 
   return (
@@ -80,7 +80,7 @@ const AppHeader: React.FC = () => {
               </Menu.Item>
               <Menu.Item key="5">
                 <Link to="/cart" className="menu-item-link">
-                  <Badge count={totalQuantity}>
+                  <Badge count={totalQuantity} className="count">
                     <FontAwesomeIcon
                       icon={faShoppingCart}
                       className="cart-icon"
@@ -96,7 +96,10 @@ const AppHeader: React.FC = () => {
                 title={<FontAwesomeIcon icon={faUser} className="user-icon" />}
               >
                 <Menu.Item key="8">Profile</Menu.Item>
-                <Menu.Item key="9">Settings</Menu.Item>
+                <Menu.Item key="login">
+                  <Link to="/login">Login</Link>
+                </Menu.Item>
+
                 <Menu.Item key="10" onClick={handleLogout}>
                   Logout
                 </Menu.Item>

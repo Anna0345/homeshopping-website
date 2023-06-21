@@ -126,9 +126,11 @@ const Cart = () => {
       key: "item",
       render: (_text: string, record: Item) => (
         <>
-          <img src={record.image} alt={record.name} width={80} height={80} />
+          {" "}
+          <Text strong>{record.name}</Text>
           <div>
-            <Text strong>{record.name}</Text>
+            <img src={record.image} alt={record.name} width={80} height={80} />
+
             <br />
             <Text>
               {record.description ? record.description.substring(0, 50) : ""}
@@ -181,11 +183,7 @@ const Cart = () => {
       key: "actions",
       render: (_text: string, record: Item) => (
         <>
-          <Button
-            type="link"
-            danger
-            onClick={() => handleRemoveItem(record.id)}
-          >
+          <Button type="link" onClick={() => handleRemoveItem(record.id)}>
             Remove
           </Button>
           <Button type="link">Move to Wishlist</Button>

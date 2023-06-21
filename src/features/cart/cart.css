@@ -1,9 +1,16 @@
 :root {
   --primary-color: #333;
+  --secondary-color: #555;
 }
 
 .ant-btn-primary {
   background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.ant-btn-danger {
+  color: var(--primary-color);
+  background-color: #fff;
   border-color: var(--primary-color);
 }
 
@@ -43,13 +50,19 @@
 }
 
 .quantity-controls .quantity-button {
-  margin: 0 4px;
+  margin: 0 8px; /* updated margin */
 }
 
 .cart-footer {
   display: flex;
   justify-content: flex-end;
   margin-top: 16px;
+}
+:where(.css-dev-only-do-not-override-w8mnev).ant-btn-link {
+  background-color: #fff;
+  color: #874e18;
+  border-color: antiquewhite;
+  margin: auto;
 }
 
 @media (max-width: 576px) {

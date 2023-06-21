@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Bad+Script&display=swap");
 
 .header {
+  display: flex;
   position: fixed;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   top: 0;
   padding: 15px;
@@ -48,7 +51,7 @@
 .heart-icon,
 .user-icon {
   font-size: 25px !important;
-  color: #dd9798 !important; /* Change the color of the icons */
+  color: #827575 !important; /* Change the color of the icons */
 }
 
 .menu-item-link {
@@ -61,11 +64,14 @@
 .menu-item-link:hover,
 .menu-item-link:focus,
 .menu-item-link:active {
-  color: #bb7747 !important;
+  color: #cc7435 !important;
   transition: color 0.2s ease-in-out !important;
 }
 
 .ant-menu-horizontal > .ant-menu-item-selected,
 .ant-menu-horizontal > .ant-menu-item-active {
-  color: #b8a56d !important;
+  color: #cc7435 !important;
+}
+.count .ant-badge-count {
+  background-color: #cc7435; /* brown */
 }

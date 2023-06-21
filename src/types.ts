@@ -9,6 +9,7 @@ export interface Product {
   quantity: number;
   inventory: number;
   categoryId: number;
+  added: boolean;
 }
 export interface RegistrationData {
   username: string;

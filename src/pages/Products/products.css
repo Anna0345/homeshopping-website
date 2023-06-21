@@ -1,0 +1,105 @@
+.card {
+  border: 1px solid #f0f0f0;
+  padding: 30px;
+  min-width: 170px;
+  max-width: 400px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+div .container {
+  display: flex;
+  justify-content: center;
+}
+:where(.css-dev-only-do-not-override-w8mnev).ant-checkbox .ant-checkbox-input {
+  margin-bottom: 5px;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 240px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+.container {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: center;
+  margin-left: 250px;
+}
+
+.sidebar .ant-checkbox-group .ant-checkbox-wrapper {
+  margin-right: 0px;
+}
+
+.sidebar .ant-checkbox-group .ant-checkbox-wrapper:last-child {
+  margin-right: 0;
+}
+
+.sidebar .ant-checkbox-group .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #c87833;
+  border-color: #b1a1a1;
+}
+.col {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+  margin: 8px;
+}
+:where(.css-dev-only-do-not-override-w8mnev).ant-btn-link {
+  color: #ea6f10;
+}
+
+.hidden-product {
+  display: none;
+}
+.card p {
+  margin-bottom: 8px;
+}
+
+.card p.price {
+  font-weight: bold;
+  font-size: 16px;
+  color: #555;
+}
+
+.card p.inventory {
+  color: #888;
+}
+.card button {
+  display: block;
+  margin: auto;
+  padding: 10px;
+  background-color: #d6d8db;
+  color: rgb(34, 32, 32);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out all;
+}
+
+.card button:hover {
+  transform: scale(1.05);
+}
