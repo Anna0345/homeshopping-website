@@ -92,7 +92,7 @@ const Products: React.FC = () => {
   const filteredProducts =
     checked.length > 0
       ? products.filter((product: Product) => checked.includes(product.name))
-      : products;
+      : [];
 
   return (
     <div className="container">
