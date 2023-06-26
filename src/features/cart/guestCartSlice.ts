@@ -33,7 +33,6 @@ const cartSlice = createSlice({
       if (state.items.length === 1) {
         state.quantity = 1;
       }
-      console.log((state.added = item.id));
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state.items));
     },
     setAdded: (state, action: PayloadAction<number | null>) => {
