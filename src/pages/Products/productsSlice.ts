@@ -6,6 +6,8 @@ interface ProductsState {
   error: string | null;
   products: Product[];
   checked: string[];
+  indeterminate: boolean;
+  checkAll: boolean;
 }
 
 const initialState: ProductsState = {
@@ -13,6 +15,8 @@ const initialState: ProductsState = {
   error: null,
   products: [],
   checked: [],
+  indeterminate: false,
+  checkAll: false,
 };
 
 const productsSlice = createSlice({
@@ -38,17 +42,28 @@ const productsSlice = createSlice({
         product.added = true;
       }
     },
+
     checkProduct(state, action: PayloadAction<string>) {
       state.checked.push(action.payload);
+      state.indeterminate =
+        !!state.checked.length && state.checked.length < state.products.length;
+      state.checkAll = state.checked.length === state.products.length;
     },
     uncheckProduct(state, action: PayloadAction<string>) {
       state.checked = state.checked.filter((name) => name !== action.payload);
+      state.indeterminate =
+        !!state.checked.length && state.checked.length < state.products.length;
+      state.checkAll = false;
     },
     checkAllProducts(state) {
       state.checked = state.products.map((product) => product.name);
+      state.indeterminate = false;
+      state.checkAll = true;
     },
     uncheckAllProducts(state) {
       state.checked = [];
+      state.indeterminate = false;
+      state.checkAll = false;
     },
   },
 });

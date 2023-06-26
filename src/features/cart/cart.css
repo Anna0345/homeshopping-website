@@ -57,6 +57,7 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 16px;
+  gap: 10px;
 }
 :where(.css-dev-only-do-not-override-w8mnev).ant-btn-link {
   background-color: #fff;

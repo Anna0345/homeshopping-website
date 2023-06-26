@@ -82,15 +82,20 @@ const Cart = () => {
     }
   };
 
-  const handleCheckout = () => {
-    const guest_id = localStorage.getItem("guest_id");
+  const handleGuestCheckout = () => {
+    navigate("/guestCheckout");
+  };
 
-    if (guest_id) {
-      navigate("/guestCheckout");
-    } else {
+  const handleUserCheckout = () => {
+    const userId = sessionStorage.getItem("userId");
+
+    if (userId) {
       navigate("/userCheckout");
+    } else {
+      navigate("/login");
     }
   };
+
   type UserAction =
     | GetCartAction
     | AddItemToCartAction
@@ -204,8 +209,11 @@ const Cart = () => {
             rowKey={(record) => record.id}
           />
           <div className="cart-footer">
-            <Button type="primary" onClick={handleCheckout}>
-              Checkout
+            <Button type="primary" onClick={handleGuestCheckout}>
+              Checkout as Guest
+            </Button>
+            <Button type="primary" onClick={handleUserCheckout}>
+              Checkout as User
             </Button>
           </div>
         </>

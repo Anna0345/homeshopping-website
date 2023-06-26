@@ -5,11 +5,13 @@ import { Product } from "../../types";
 interface CartState {
   items: Product[];
   quantity: number;
+  added: number | null;
 }
 
 const initialState: CartState = {
   items: [],
   quantity: 1,
+  added: null,
 };
 
 const CART_STORAGE_KEY = "cart_items";
@@ -31,8 +33,11 @@ const cartSlice = createSlice({
       if (state.items.length === 1) {
         state.quantity = 1;
       }
-
+      console.log((state.added = item.id));
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state.items));
+    },
+    setAdded: (state, action: PayloadAction<number | null>) => {
+      state.added = action.payload;
     },
     setCartItems: (state, action: PayloadAction<Product[]>) => {
       state.items = action.payload;
@@ -102,6 +107,7 @@ export const {
   incrementQuantity,
   decrementQuantity,
   clearCart,
+  setAdded,
 } = cartSlice.actions;
 
 export const selectGuestCartItems = (state: RootState) => state.cart.items;

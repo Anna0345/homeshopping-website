@@ -102,7 +102,7 @@ const shoppingCartSlice = createSlice({
       action: PayloadAction<AddItemToCartSuccessPayload>
     ) => {
       console.log(action.payload.cart);
-      console.log((state.items = action.payload.cart.items)); //undefined
+      console.log((state.items = action.payload.cart.items));
 
       state.loading = false;
     },

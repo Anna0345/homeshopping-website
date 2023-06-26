@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Checkbox, Col, Row } from "antd";
 import { motion } from "framer-motion";
 import { RootState } from "./../../store";
-import { addToCart as addToGuestCart } from "../../features/cart/guestCartSlice";
+import {
+  addToCart as addToGuestCart,
+  setAdded,
+} from "../../features/cart/guestCartSlice";
 import { addItemToCartRequest as addToUserCart } from "../../features/cart/userCartSlice";
 import { Product } from "../../types";
+
 import { nanoid } from "nanoid";
 import storageSession from "reduxjs-toolkit-persist/lib/storage/session";
 import "./products.css";
@@ -15,6 +19,7 @@ import {
   checkProduct,
   uncheckProduct,
 } from "./productsSlice";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 
 const cardVariants = {
   initial: { opacity: 0, y: 20 },
@@ -29,10 +34,16 @@ const buttonVariants = {
 const Products: React.FC = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.products.products);
+  console.log(products);
   const checked = useSelector((state: RootState) => state.products.checked);
-  const [added, setAdded] = useState<number | null>(null);
+  console.log(checked);
+  const checkAll = useSelector((state: RootState) => state.products.checkAll);
+  console.log(checkAll);
+  const indeterminate = useSelector(
+    (state: RootState) => state.products.indeterminate
+  );
+  const added = useSelector((state: RootState) => state.cart.added);
 
-  // object
   let guestId = localStorage.getItem("guest_id");
 
   useEffect(() => {
@@ -41,7 +52,6 @@ const Products: React.FC = () => {
 
   const handleAddToCart = async (product: Product) => {
     console.log("handleAddToCart called with product:", product);
-
     const userId = await storageSession.getItem("userId");
     if (!userId) {
       if (!guestId) {
@@ -49,8 +59,8 @@ const Products: React.FC = () => {
         localStorage.setItem("guest_id", guestId);
       }
       dispatch(addToGuestCart({ item: { ...product, quantity: 1 } }));
-      setAdded(product.id);
-      setTimeout(() => setAdded(null), 3000);
+      dispatch(setAdded(product.id));
+      setTimeout(() => dispatch(setAdded(null)), 3000);
     } else {
       const cartId = await storageSession.getItem("cartId");
       if (cartId && userId) {
@@ -65,56 +75,55 @@ const Products: React.FC = () => {
             image: product.image,
           })
         );
-        setAdded(product.id);
-        setTimeout(() => setAdded(null), 2000);
+        dispatch(setAdded(product.id));
+        setTimeout(() => dispatch(setAdded(null)), 3000);
       } else {
         console.log("CartId not found");
       }
     }
   };
-  const handleCheckboxChange = (e: any) => {
-    const { checked, value } = e.target;
-    if (value === "All") {
-      if (checked) {
+  const handleCheckboxChange = (e: CheckboxChangeEvent) => {
+    if (e.target.value === "Select All") {
+      if (e.target.checked) {
         dispatch(checkAllProducts());
       } else {
         dispatch(uncheckAllProducts());
       }
     } else {
-      if (checked) {
-        dispatch(checkProduct(value));
+      if (e.target.checked) {
+        dispatch(checkProduct(e.target.value));
       } else {
-        dispatch(uncheckProduct(value));
+        dispatch(uncheckProduct(e.target.value));
       }
     }
   };
-
-  const filteredProducts =
-    checked.length > 0
-      ? products.filter((product: Product) => checked.includes(product.name))
-      : [];
+  useEffect(() => {
+    console.log("checkAll changed:", checkAll);
+  }, [checkAll]);
 
   return (
     <div className="container">
       <div className="sidebar">
-        <Checkbox.Group>
+        <div className="checkbox-container">
           <Checkbox
-            value="All"
+            value="Select All"
+            indeterminate={indeterminate}
             onChange={handleCheckboxChange}
-            checked={checked.length === products.length}
+            checked={checkAll}
           >
-            All
+            Select All
           </Checkbox>
-          {products.map((product: Product) => (
+          {products?.map((product: Product) => (
             <Checkbox
               key={product.id}
               value={product.name}
               onChange={handleCheckboxChange}
+              checked={checked.includes(product.name)}
             >
               {product.name}
             </Checkbox>
           ))}
-        </Checkbox.Group>
+        </div>
       </div>
 
       <Row className="row" gutter={[24, 24]} justify="center">
@@ -122,9 +131,7 @@ const Products: React.FC = () => {
           <Col
             key={product.id}
             className={`col ${
-              filteredProducts.includes(product)
-                ? "product-col"
-                : "hidden-product"
+              checked.includes(product.name) ? "product-col" : "hidden-product"
             }`}
           >
             <motion.div

@@ -8,18 +8,24 @@ import { useNavigate, Link } from "react-router-dom";
 
 const { Title } = Typography;
 
+const getCharacterValidationError = (str: string) => {
+  return `Your password must have at least 1 ${str} character`;
+};
 const registrationSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
+    .matches(/[0-9]/, getCharacterValidationError("digit"))
+    .matches(/[a-z]/, getCharacterValidationError("lowercase"))
+    .matches(/[A-Z]/, getCharacterValidationError("uppercase")),
   confirmPassword: Yup.string()
+    .required("Password is required")
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Confirm Password is required"),
 });
 
-const AuthRegistration = () => {
+function AuthRegistration() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -148,6 +154,6 @@ const AuthRegistration = () => {
       </Form>
     </div>
   );
-};
+}
 
 export default AuthRegistration;

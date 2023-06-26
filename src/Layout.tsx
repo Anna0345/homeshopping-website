@@ -1,15 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   useLocation,
 } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Products from "./pages/Products/products";
-import NoPage from "./pages/NotFound";
 import AppHeader from "./components/Header";
 import Cart from "./features/cart/cart";
 import AuthLogin from "./features/auth/authLogin";
@@ -17,24 +12,32 @@ import AuthRegister from "./features/auth/authRegister";
 import Checkout from "./features/auth/Checkout";
 import GuestCheckout from "./features/auth/GuestCheckout";
 
+const Home = React.lazy(() => import("./pages/Home"));
+const About = React.lazy(() => import("./pages/About"));
+const Contact = React.lazy(() => import("./pages/Contact"));
+const Products = React.lazy(() => import("./pages/Products/products"));
+const NoPage = React.lazy(() => import("./pages/NotFound"));
+
 const Layout: React.FC = () => {
   return (
     <Router>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/cart/:userId" element={<Cart />} />
-        <Route path="/login" element={<AuthLogin />} />
-        <Route path="/register" element={<AuthRegister />} />
-        <Route path="/userCheckout" element={<Checkout />} />
-        <Route path="/guestCheckout" element={<GuestCheckout />} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart/:userId" element={<Cart />} />
+          <Route path="/login" element={<AuthLogin />} />
+          <Route path="/register" element={<AuthRegister />} />
+          <Route path="/userCheckout" element={<Checkout />} />
+          <Route path="/guestCheckout" element={<GuestCheckout />} />
 
-        <Route path="*" element={<NoPage />} />
-      </Routes>
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 };
